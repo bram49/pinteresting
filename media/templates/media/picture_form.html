@@ -1,0 +1,51 @@
+
+{% extends 'media/base.html' %}
+{% block title %}Add a New Picture Post{% endblock %}
+{% block add_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-sm-12 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Add a New Post</h3><br>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'media/form_template.html' %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Submit</button><br><br>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>What is Pinteresting?</h3>
+                    <p>Pinteresting is an app that allows you to upload and store pictures. Other users can watch these images and comment on it.</p>
+                    <h3>How do I post pictures?</h3>
+                    <p>First, create a new post by filling out the form on this page. Put a link to the picture in the media section and your post is ready to go.</p>
+
+                    <h3>For testing you can use the input below or type something yourself</h3>
+                    <P>Artist: Johannes Vermeer</P>
+                    <P>Title: Girl With A Pearl Earring</P>
+                    <p>Media: https://10mosttoday.com/wp-content/uploads/2013/09/Girl_With_A_Pearl_Earring.jpg</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

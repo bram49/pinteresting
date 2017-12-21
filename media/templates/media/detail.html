@@ -1,0 +1,78 @@
+{% extends 'media/base.html' %}
+{% block title %}{{ picture }}{% endblock %}
+{% block pictures_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid reactions-container">
+
+    <div class="row">
+
+        <!-- Left Picture Info -->
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <a href="{% url 'media:detail' picture.id %}">
+                        {% if picture.media %}
+                            <img src="{{ picture.media }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1>{{ picture.title }} <small>{{ picture.genre }}</small></h1>
+                    <h2>{{ picture.artist }}</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Reaction Info -->
+        <div class="col-sm-8 col-md-9">
+
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" class="active"><a href="{% url 'media:detail' picture.id %}">View All</a></li>
+                <li role="presentation"><a href="#">Add New Reaction</a></li>
+            </ul>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>All Reactions</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    {% if picture.reaction_set.all %}
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Title</th>
+                                <th>Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for reaction in picture.reaction_set.all %}
+                            <tr>
+                                <td>{{ reaction.reaction_poster }}</td>
+                                <td>{{ reaction.reaction_title }}</td>
+                                <td>{{ reaction.reaction_description }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <h5>No reactions here yet. You can be the first to post a reaction!</h5>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
